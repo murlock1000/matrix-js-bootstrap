@@ -2,14 +2,14 @@ global.Olm = require('olm');
 var sdk = require('matrix-js-sdk');
 const { ensureOlmSessionsForDevices } = require('matrix-js-sdk/lib/crypto/olmlib');
 var LocalStorage = require('node-localstorage');
-var config = require('./config.js')
+const config = require('./config.js')
 
 const enc = new TextEncoder();
 var localStorage =  new LocalStorage.LocalStorage('./store');
 var argv = require('minimist')(process.argv.slice(2));
 
 if(argv.u && argv.p && argv.s) {
-	config.user_id = argv.u;
+	config.user_id = '@'+argv.u+':'+config.domain;
 	config.user_password = argv.p;
 	config.passphrase = argv.s;
 	console.log(config)
