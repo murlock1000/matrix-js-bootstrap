@@ -25,10 +25,9 @@ if(argv.u && argv.p && argv.s) {
 	config.user_id = '@'+argv.u+':'+config.domain;
 	config.user_password = argv.p;
 	config.passphrase = argv.s;
-	console.log(config)
 	initApp();
 }else{
-	console.log("Usage: node index.js -u <username> -p <password> -s <passphrase>");
+	console.scriptout("Usage: node index.js -u <username> -p <password> -s <passphrase>");
 }
 
 async function initApp(){
