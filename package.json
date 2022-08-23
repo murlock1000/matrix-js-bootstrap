@@ -18,6 +18,7 @@
   "homepage": "https://github.com/murlock1000/matrix-js-bootstrap#readme",
   "dependencies": {
     "matrix-js-sdk": "^17.2.0",
+    "minimist": "^1.2.6",
     "node-localstorage": "^2.2.1",
     "olm": "https://packages.matrix.org/npm/olm/olm-3.2.1.tgz"
   }
