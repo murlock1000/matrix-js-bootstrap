@@ -104,8 +104,9 @@ async function setupSecretStorage(matrixClient){
 	});
 
 	recoveryKey.then(val =>{
-		console.scriptout("Encoded private key: "+val.encodedPrivateKey);
-		console.scriptout("Passphrase: "+config.passphrase);
+		console.scriptout(val.encodedPrivateKey);
+		//console.scriptout("Encoded private key: "+val.encodedPrivateKey);
+		//console.scriptout("Passphrase: "+config.passphrase);
 	});
 	// Lastly, upload device keys if not done already
 	await matrixClient.uploadKeys();
