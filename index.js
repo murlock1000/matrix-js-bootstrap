@@ -1,11 +1,24 @@
 global.Olm = require('olm');
 var sdk = require('matrix-js-sdk');
+
+// Disable logging
+console.log = function(){};
+console.warning = function(){};
+console.info = function(){};
+console.scriptout = function (d) {
+	process.stdout.write(d + '\n');
+};
+
+
 const { ensureOlmSessionsForDevices } = require('matrix-js-sdk/lib/crypto/olmlib');
+const enc = new TextEncoder();
 var LocalStorage = require('node-localstorage');
+var localStorage =  new LocalStorage.LocalStorage('./store');
+
+// Import config with homeserver URL and domain
 const config = require('./config.js')
 
-const enc = new TextEncoder();
-var localStorage =  new LocalStorage.LocalStorage('./store');
+// Parse CLI arguments
 var argv = require('minimist')(process.argv.slice(2));
 
 if(argv.u && argv.p && argv.s) {
@@ -92,8 +105,8 @@ async function setupSecretStorage(matrixClient){
 	});
 
 	recoveryKey.then(val =>{
-		console.log("Encoded private key: "+val.encodedPrivateKey);
-		console.log("Passphrase: "+config.passphrase);
+		console.scriptout("Encoded private key: "+val.encodedPrivateKey);
+		console.scriptout("Passphrase: "+config.passphrase);
 	});
 	// Lastly, upload device keys if not done already
 	await matrixClient.uploadKeys();
