@@ -21,13 +21,13 @@ const config = require('./config.js')
 // Parse CLI arguments
 var argv = require('minimist')(process.argv.slice(2));
 
-if(argv.u && argv.p && argv.s) {
+if(argv.u && argv.p && argv.r) {
 	config.user_id = '@'+argv.u+':'+config.domain;
 	config.user_password = argv.p;
-	config.passphrase = argv.s;
+	config.passphrase = argv.r;
 	initApp();
 }else{
-	console.scriptout("Usage: node index.js -u <username> -p <password> -s <passphrase>");
+	console.scriptout("Usage: node index.js -u <username> -p <password> -r <passphrase>");
 }
 
 async function initApp(){
