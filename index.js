@@ -94,6 +94,9 @@ async function setupSecretStorage(matrixClient){
 
 	const recoveryKey = matrixClient.createRecoveryKeyFromPassphrase(config.passphrase);
 
+	// Set callback that is required during the bootstrap process.
+	matrixClient.cryptoCallbacks.getCrossSigningKey = async () => recoveryKey;
+
 	// Setting up the secret storage:
 	// Signs the SS key with cross-signing keys. 
 	// This step also uploads cross-signing keys to account_data.
