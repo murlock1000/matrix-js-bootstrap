@@ -100,7 +100,7 @@ async function setupSecretStorage(matrixClient){
 	matrixClient.cryptoCallbacks.getCrossSigningKey = async () => recoveryKey;
 
 	// Setting up the secret storage:
-	// Signs the SSSS default key with cross-signing keys. 
+	// Signs the SSSS default key with master cross-signing key and device (for backwards compatibility of device-to-device verification). 
 	// This step also uploads cross-signing keys to account_data.
 	await matrixClient.bootstrapSecretStorage({
 		createSecretStorageKey: async () => recoveryKey,
