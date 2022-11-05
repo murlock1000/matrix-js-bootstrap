@@ -1,5 +1,9 @@
 global.Olm = require('olm');
-var sdk = require('matrix-js-sdk');
+const sdk = require('matrix-js-sdk');
+
+const { LocalStorage } = require('node-localstorage');
+const localStorage =  new LocalStorage('./store');
+const enc = new TextEncoder();
 
 // Disable logging
 console.log = function(){};
@@ -9,18 +13,11 @@ console.scriptout = function (d) {
 	process.stdout.write(d + '\n');
 };
 
-
-const { ensureOlmSessionsForDevices } = require('matrix-js-sdk/lib/crypto/olmlib');
-const enc = new TextEncoder();
-var LocalStorage = require('node-localstorage');
-var localStorage =  new LocalStorage.LocalStorage('./store');
-
 // Import config with homeserver URL and domain
 const config = require('./config.js')
 
 // Parse CLI arguments
-var argv = require('minimist')(process.argv.slice(2));
-
+const argv = require('minimist')(process.argv.slice(2));
 if(argv.u && argv.p && argv.r) {
 	config.user_id = '@'+argv.u+':'+config.domain;
 	config.user_password = argv.p;
@@ -51,7 +48,7 @@ async function initApp(){
 
 	// Get information about the user
 	let uinfo = await matrixClient.whoami();
-	console.log("Bootstrapping user: "+uinfo.user_id+" with device ID: "+uinfo.device_id);
+	console.log("Bootstrapping SSSS and cross-signing for user: "+uinfo.user_id+" from device ID: "+uinfo.device_id);
 	
 
 	// Initializing crypto creates a new Olm device and 
