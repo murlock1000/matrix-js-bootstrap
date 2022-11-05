@@ -111,8 +111,6 @@ async function setupSecretStorage(matrixClient){
 	recoveryKey.then(val =>{
 		console.scriptout(val.encodedPrivateKey);
 	});
-	// Lastly, upload device keys if not done already
-	await matrixClient.uploadKeys();
 
 	// Device session no longer needed - logout.
 	await matrixClient.logout();
