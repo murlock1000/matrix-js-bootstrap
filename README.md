@@ -8,7 +8,7 @@ Provides detailed scripts for:
 This script is used for generating new Cross-Signing keys (master, self_signing, user_signing). It then bootstraps a new SSSS instance on the server with a recovery (default) key generated from a provided recovery passphrase. The encrypted Cross-signing keys are then uploaded to the SSSS. The encoded recovery key is output through standard output. 
 
 # sign.js
-This script fetches the existing Cross-signing keys from the SSSS. It validates them with the key info stored in the users device list. The keys are decrypted using the provided passphrase/recovery key. The master key is then used to sign a new Secure Backup version. It skips signing the secure backup using the device.
+This script fetches the existing Cross-signing keys from the SSSS along with the default key. The default key is then decrypted using the provided passphrase/recovery key. Cross-signing keys are validated so they match the key info stored in the users device key list. The decrypted (with default key) master key is then used to sign a new Secure Backup version. It skips signing the secure backup using the device.
 
 # Project setup.
 
