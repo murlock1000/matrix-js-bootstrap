@@ -23,7 +23,7 @@ if(argv.u && argv.p && argv.r) {
 	config.passphrase = argv.r;
 	initApp();
 }else{
-	console.scriptout("Usage: node index.js -u <username> -p <password> -r <passphrase>");
+	console.scriptout("Usage: node bootstrap.js -u <username> -p <password> -r <recovery passphrase>");
 }
 
 async function initApp(){
