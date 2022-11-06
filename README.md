@@ -1,7 +1,14 @@
 # matrix-js-bootstrap
-Bootstraps more advanced e2ee features, such as cross-signing and SSSS for a matrix user.
+Provides detailed scripts for:
+1. Bootstrapping the more advanced e2ee features: Cross-signing and SSSS (Secure Backup).
+2. Fetching the Cross-signing keys from SSSS and decrypting them with a passphrase/backup key.
+3. Signing the SSSS (Secure Backup) using the master Cross-Signing key.
 
-This script is used for generating a new Secure Secret Storage from a provided passphrase for a Matrix user. The encoded private key is printed out to the console and can be written down by the user or saved to a file. 
+# bootstrap.js
+This script is used for generating new Cross-Signing keys (master, self_signing, user_signing). It then bootstraps a new SSSS instance on the server with a recovery (default) key generated from a provided recovery passphrase. The encrypted Cross-signing keys are then uploaded to the SSSS. The encoded recovery key is output through standard output. 
+
+# sign.js
+This script fetches the existing Cross-signing keys from the SSSS. It validates them with the key info stored in the users device list. The keys are decrypted using the provided passphrase/recovery key. The master key is then used to sign a new Secure Backup version. It skips signing the secure backup using the device.
 
 # Project setup.
 
