@@ -73,6 +73,9 @@ async function getSecretStorageKey(keyInfos){
                 // If recovery key passed - decode it.
                 key = decodeRecoveryKey(config.recoveryKey);
             }
+            if(!await matrixClient.checkSecretStorageKey(key, keyInfo)){
+                throw new Error("Incorrect passphrase/recovery key");
+            }
             // (DEBUG) console.scriptout(JSON.stringify(key, null, 2));
             return [keyId, key];
         }
@@ -154,7 +157,7 @@ async function initApp(){
 
     // Set the getCrossSigningKey callback to return the key from SSSS (We assume the keys have been uploaded to server before).
     // This was already set by the crypto constructor to CrossSigningInfo.getFromSecretStorage.
-    // However, I am rewriting it here with validation so we can check the extracted public parts outside the sdk (does not log them).
+    // However, I am rewriting it here with validation so we can check the extracted public parts outside the sdk (sdk does not log them).
 
     matrixClient.cryptoCallbacks.getCrossSigningKey = async (type, expectedPubkey) => {
 
